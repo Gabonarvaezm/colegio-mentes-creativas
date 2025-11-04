@@ -13,6 +13,9 @@ import ConversorUnid from "../views/ConversorUnid";
 import ValidContrasena from "../views/ValidContrasena";
 import ContadorClics from "../views/ContadorClics";
 import ListaTareas from "../views/ListaTareas";
+import CircuitosElectricosView from "../views/CircuitosElectricosView";
+import CreacionCuentosView from "../views/CreacionCuentosView";
+import GraficosMatematicasView from "../views/GraficosMatematicasView";
 
 export default function AppRoutes() {
   return (
@@ -29,6 +32,9 @@ export default function AppRoutes() {
         <Route path="validcontrasena" element={<ValidContrasena />} />
         <Route path="contadorclics" element={<ContadorClics />} />
         <Route path="listareas" element={<ListaTareas />} />
+        <Route path="circuitos" element={<CircuitosElectricosView />} />
+        <Route path="cuentos" element={<CreacionCuentosView />} />
+        <Route path="graficos" element={<GraficosMatematicasView />} />
       </Route>
     </Routes>
   );

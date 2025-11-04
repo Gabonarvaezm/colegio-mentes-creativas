@@ -90,6 +90,18 @@ export default function GraficosMatematicas() {
         <button onClick={() => setChartType("circular")}>Circular</button>
       </div>
 
+      {/* Mostrar los datos para evitar warning */}
+      <div>
+        <h3>Datos de ventas:</h3>
+        <ul>
+          {data.map((item) => (
+            <li key={item.name}>
+              {item.name}: {item.ventas} ventas
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <h2>{questions[currentQuestion].question}</h2>
 
       <div>

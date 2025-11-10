@@ -29,6 +29,18 @@ describe("MultiplicationTable", () => {
     expect(screen.getByText("5 × 10 = 50")).toBeInTheDocument();
   });
 
+  test("genera 10 filas al crear la tabla", () => {
+    render(<MultiplicationTable />);
+    const input = screen.getByPlaceholderText("Número");
+    const button = screen.getByRole("button", { name: /Generar/i });
+    fireEvent.change(input, { target: { value: "3" } });
+    fireEvent.click(button);
+    // Debe generar del 1 al 10
+    expect(screen.getByText("3 × 10 = 30")).toBeInTheDocument();
+    const items = screen.getAllByRole("listitem");
+    expect(items.length).toBe(10);
+  });
+
   test("no genera tabla si el input está vacío", () => {
     render(<MultiplicationTable />);
     const button = screen.getByRole("button", { name: /Generar/i });

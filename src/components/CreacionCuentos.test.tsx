@@ -221,3 +221,24 @@ describe("CreacionCuentos - Guardado de cuento", () => {
     expect(screen.getByText(/Cuentos guardados: 1/i)).toBeInTheDocument();
   });
 });
+
+// Prueba roja: tras crear nuevo cuento, no debe resetear guardados (expectativa incorrecta)
+describe("CreacionCuentos - Reinicio", () => {
+  test("contador se reinicia tras crear nuevo (rojo)", () => {
+    render(<CreacionCuentos />);
+    jest.spyOn(window, "alert").mockImplementation(() => {});
+
+    // Generar y guardar una vez
+    fireEvent.click(screen.getByText(/un valiente caballero/i).closest("button")!);
+    fireEvent.click(screen.getByText(/un castillo mágico/i).closest("button")!);
+    fireEvent.click(screen.getByText(/encontró un mapa del tesoro/i).closest("button")!);
+    fireEvent.click(screen.getByRole("button", { name: /Generar Mi Cuento/i }));
+    fireEvent.click(screen.getByRole("button", { name: /Guardar Cuento/i }));
+
+    // Reiniciar para crear nuevo cuento
+    fireEvent.click(screen.getByRole("button", { name: /Crear Nuevo Cuento/i }));
+
+    // Expectativa incorrecta intencional: debería seguir mostrando 1, pero esperamos 0
+    expect(screen.getByText(/Cuentos guardados: 0/i)).toBeInTheDocument();
+  });
+});

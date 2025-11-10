@@ -78,4 +78,9 @@ describe("GraficosMatematicas", () => {
     render(<GraficosMatematicas />);
     expect(screen.getByText("¿Qué día se registraron más ventas?")).toBeInTheDocument();
   });
+
+  test("Oculta resultados al inicio", () => {
+    render(<GraficosMatematicas />);
+    expect(screen.queryByText("¡Actividad Completada!")).not.toBeInTheDocument();
+  });
 });

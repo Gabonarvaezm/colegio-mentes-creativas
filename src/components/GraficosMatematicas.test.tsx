@@ -104,4 +104,10 @@ describe("GraficosMatematicas", () => {
     render(<GraficosMatematicas />);
     expect(screen.queryByText("¡Actividad Completada!")).not.toBeInTheDocument();
   });
+
+  // ROJO: expectativa incorrecta del encabezado (sin acento)
+  test("Encabezado muestra 'Interpretacion de Graficos' (rojo)", () => {
+    render(<GraficosMatematicas />);
+    expect(screen.getByText("Interpretacion de Graficos")).toBeInTheDocument();
+  });
 });

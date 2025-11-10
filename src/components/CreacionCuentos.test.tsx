@@ -202,7 +202,7 @@ describe("CreacionCuentos - Encabezado", () => {
 
 // Prueba roja del contador de guardados
 describe("CreacionCuentos - Guardado de cuento", () => {
-  test("contador de cuentos guardados incorrecto (rojo)", () => {
+  test("contador de cuentos guardados correcto", () => {
     render(<CreacionCuentos />);
     jest.spyOn(window, "alert").mockImplementation(() => {});
 
@@ -217,7 +217,7 @@ describe("CreacionCuentos - Guardado de cuento", () => {
     const saveButton = screen.getByRole("button", { name: /Guardar Cuento/i });
     fireEvent.click(saveButton);
 
-    // Expectativa intencionalmente incorrecta
-    expect(screen.getByText(/Cuentos guardados: 2/i)).toBeInTheDocument();
+    // Expectativa correcta: 1 guardado
+    expect(screen.getByText(/Cuentos guardados: 1/i)).toBeInTheDocument();
   });
 });

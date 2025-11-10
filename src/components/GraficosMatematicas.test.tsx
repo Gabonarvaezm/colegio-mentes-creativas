@@ -105,9 +105,9 @@ describe("GraficosMatematicas", () => {
     expect(screen.queryByText("¡Actividad Completada!")).not.toBeInTheDocument();
   });
 
-  // ROJO: expectativa incorrecta del encabezado (sin acento)
-  test("Encabezado muestra 'Interpretacion de Graficos' (rojo)", () => {
+  // VERDE: encabezado correcto con acento, insensible al emoji
+  test("Encabezado muestra 'Interpretación de Gráficos' (verde)", () => {
     render(<GraficosMatematicas />);
-    expect(screen.getByText("Interpretacion de Graficos")).toBeInTheDocument();
+    expect(screen.getByText(/Interpretación de Gráficos/i)).toBeInTheDocument();
   });
 });

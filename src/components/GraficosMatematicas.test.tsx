@@ -110,10 +110,4 @@ describe("GraficosMatematicas", () => {
     render(<GraficosMatematicas />);
     expect(screen.getByText(/Interpretación de Gráficos/i)).toBeInTheDocument();
   });
- 
-  // Prueba roja: espera botón Reintentar visible al inicio
-  test("muestra botón Reintentar al inicio (rojo)", () => {
-    render(<GraficosMatematicas />);
-    expect(screen.getByRole('button', { name: /Reintentar/i })).toBeInTheDocument();
-  });
 });

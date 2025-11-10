@@ -82,4 +82,17 @@ describe("CircuitosElectricos - Fallos intencionales", () => {
     render(<CircuitosElectricos />);
     expect(screen.getByText(/Circuitos Eléctricos Simples/i)).toBeInTheDocument();
   });
+
+  // ROJO: texto del botón incorrecto (espera 'Reinicio')
+  test("texto del botón reinicio (rojo)", () => {
+    render(<CircuitosElectricos />);
+    expect(screen.getByRole("button", { name: /Reinicio/i })).toBeInTheDocument();
+  });
+
+  // ROJO: layout con 2 columnas al inicio
+  test("layout muestra 2 columnas al inicio (rojo)", () => {
+    render(<CircuitosElectricos />);
+    const layout = screen.getByTestId("layout");
+    expect(layout).toHaveClass("grid-cols-2");
+  });
 });

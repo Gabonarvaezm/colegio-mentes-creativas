@@ -1,6 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import GraficosMatematicas from "./GraficosMatematicas";
+// Usamos waitFor para sincronizar con setTimeout sin modificar el componente
 
 describe("GraficosMatematicas", () => {
   test("Muestra la primera pregunta al iniciar", () => {
@@ -19,20 +20,26 @@ describe("GraficosMatematicas", () => {
     render(<GraficosMatematicas />);
     const button = screen.getByText("Viernes");
     await userEvent.click(button);
-    // Espera un poco porque avanza en setTimeout
-    await new Promise((r) => setTimeout(r, 1100));
-    expect(screen.getByText("¿Cuántas ventas se registraron el miércoles?")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("¿Cuántas ventas se registraron el miércoles?"))
+        .toBeInTheDocument();
+    }, { timeout: 1500 });
   });
 
   test("Muestra los resultados al finalizar", async () => {
     render(<GraficosMatematicas />);
     const firstAnswer = screen.getByText("Viernes");
     await userEvent.click(firstAnswer);
-    await new Promise((r) => setTimeout(r, 1100));
+    await waitFor(() => {
+      expect(screen.getByText("¿Cuántas ventas se registraron el miércoles?"))
+        .toBeInTheDocument();
+    }, { timeout: 1500 });
     const secondAnswer = screen.getByText("38");
     await userEvent.click(secondAnswer);
-    await new Promise((r) => setTimeout(r, 1100));
-    expect(screen.getByText("¡Actividad Completada!")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("¡Actividad Completada!"))
+        .toBeInTheDocument();
+    }, { timeout: 1500 });
   });
 
   test("Cambia el tipo de gráfico al seleccionar opción", async () => {
@@ -55,25 +62,20 @@ describe("GraficosMatematicas", () => {
   });
 
   // Sección de fallos intencionales para CI (serán corregidos luego)
-  test("Muestra tipo 'circular' al iniciar (fallo)", () => {
+  test("Muestra tipo 'barras' al iniciar (corrección)", () => {
     render(<GraficosMatematicas />);
-    // En realidad inicia en 'barras'
-    expect(screen.getByText(/Tipo de gráfico seleccionado: circular/i)).toBeInTheDocument();
+    expect(screen.getByText(/Tipo de gráfico seleccionado: barras/i)).toBeInTheDocument();
   });
 
-  test("Deshabilita opciones al iniciar sin respuesta (fallo)", () => {
+  test("Opciones habilitadas al iniciar sin respuesta (corrección)", () => {
     render(<GraficosMatematicas />);
-    // En realidad las opciones están habilitadas al inicio
     ["Lunes", "Martes", "Jueves", "Viernes"].forEach((text) => {
-      expect(screen.getByText(text)).toBeDisabled();
+      expect(screen.getByText(text)).not.toBeDisabled();
     });
   });
 
-  test("Muestra segunda pregunta al iniciar (fallo)", () => {
+  test("Muestra primera pregunta al iniciar (corrección)", () => {
     render(<GraficosMatematicas />);
-    // En realidad muestra la primera pregunta
-    expect(
-      screen.getByText("¿Cuántas ventas se registraron el miércoles?")
-    ).toBeInTheDocument();
+    expect(screen.getByText("¿Qué día se registraron más ventas?")).toBeInTheDocument();
   });
 });

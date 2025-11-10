@@ -175,22 +175,19 @@ describe("CreacionCuentos - Generación de cuento", () => {
   });
 
   // Sección de fallos intencionales para CI (serán corregidos luego)
-  test("debe habilitar el botón generar al inicio (fallo)", () => {
+  test("debe deshabilitar el botón generar al inicio (corrección)", () => {
     render(<CreacionCuentos />);
     const generateButton = screen.getByRole("button", { name: /Generar Mi Cuento/i });
-    // En realidad está deshabilitado al inicio
-    expect(generateButton).not.toBeDisabled();
+    expect(generateButton).toBeDisabled();
   });
 
-  test("debe mostrar contador 1/3 al inicio (fallo)", () => {
+  test("debe mostrar contador 0/3 al inicio (corrección)", () => {
     render(<CreacionCuentos />);
-    // En realidad muestra 0/3 al inicio
-    expect(screen.getByText(/Seleccionadas: 1\/3/i)).toBeInTheDocument();
+    expect(screen.getByText(/Seleccionadas: 0\/3/i)).toBeInTheDocument();
   });
 
-  test("debe mostrar la vista de cuento al inicio (fallo)", () => {
+  test("no debe mostrar la vista de cuento al inicio (corrección)", () => {
     render(<CreacionCuentos />);
-    // La vista de cuento solo aparece tras generar la historia
-    expect(screen.getByText(/Tu Cuento Creado/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Tu Cuento Creado/i)).not.toBeInTheDocument();
   });
 });

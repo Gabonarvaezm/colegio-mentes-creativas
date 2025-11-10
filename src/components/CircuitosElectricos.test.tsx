@@ -60,29 +60,26 @@ describe("CircuitosElectricos Component", () => {
 
 // Sección de fallos intencionales para CI (serán corregidos luego)
 describe("CircuitosElectricos - Fallos intencionales", () => {
-  test("debería mostrar explicación al inicio (fallo)", () => {
+  test("no debe mostrar explicación al inicio (corrección)", () => {
     render(<CircuitosElectricos />);
-    // En realidad NO se muestra al inicio
-    expect(screen.getByTestId("explicacion")).toBeInTheDocument();
+    const explanation = screen.queryByTestId("explicacion");
+    expect(explanation).not.toBeInTheDocument();
   });
 
-  test("debería tener layout con 2 columnas al inicio (fallo)", () => {
+  test("debe tener layout con 1 columna al inicio (corrección)", () => {
     render(<CircuitosElectricos />);
     const layout = screen.getByTestId("layout");
-    // En realidad es grid-cols-1 inicialmente
-    expect(layout).toHaveClass("grid-cols-2");
+    expect(layout).toHaveClass("grid-cols-1");
   });
 
-  test("debería tener botón reiniciar deshabilitado (fallo)", () => {
+  test("botón reiniciar debe estar habilitado (corrección)", () => {
     render(<CircuitosElectricos />);
     const resetButton = screen.getByTestId("boton-reiniciar");
-    // En realidad está habilitado
-    expect(resetButton).toBeDisabled();
+    expect(resetButton).not.toBeDisabled();
   });
 
-  test("debería mostrar título 'Circuitos Avanzados' (fallo)", () => {
+  test("debe mostrar el título correcto (corrección)", () => {
     render(<CircuitosElectricos />);
-    // El título real es 'Circuitos Eléctricos Simples'
-    expect(screen.getByText(/Circuitos Avanzados/i)).toBeInTheDocument();
+    expect(screen.getByText(/Circuitos Eléctricos Simples/i)).toBeInTheDocument();
   });
 });

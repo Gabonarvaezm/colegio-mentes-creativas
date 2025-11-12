@@ -21,6 +21,7 @@ describe("CreacionCuentos Component", () => {
     expect(screen.getByText(/un castillo mágico/i)).toBeTruthy();
     expect(screen.getByText(/un bosque encantado/i)).toBeTruthy();
     expect(screen.getByText(/una ciudad futurista/i)).toBeTruthy();
+    expect(screen.getByText(/una isla misteriosa/i)).toBeTruthy();
   });
 
   // RF-03.03: Validar opciones de acciones

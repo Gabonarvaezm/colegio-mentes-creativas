@@ -1,4 +1,4 @@
-// src/components/CreacionCuentos.test.tsx
+//creacion de cuentos test
 import { render, screen, fireEvent } from "@testing-library/react";
 import CreacionCuentos from "./CreacionCuentos";
 
